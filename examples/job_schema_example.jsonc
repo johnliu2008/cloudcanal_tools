@@ -1,0 +1,43 @@
+// 通用 schema 示例（JSONC：支持 // 与 /* */ 注释）。
+// 三个文件分别对应：源端 schema、目标端 schema、映射定义。
+// 获取真实模板：python cloudcanal_tools.py export_job_schema <cc_num> -a <job_id> --out-dir ./myjob
+// 建任务：python cloudcanal_tools.py create_datajob <cc_num> -a db1,db2 \
+//   --src-schema-file ./myjob/source_schema.json \
+//   --dst-schema-file ./myjob/target_schema.json \
+//   [--mapping-file ./myjob/mapping_config.json] \
+//   -e <src_ds_id> -f <dst_ds_id> -g <dest_name>
+
+{
+  // 源端/目标端 schema：list[dict]，每项一个库
+  "src_schema_example": [
+    {
+      "db": "db1",
+      "dbPattern": "",
+      "actions": [],
+      "blackActs": [],
+      "inBlackList": false,
+      "targetAutoCreate": false,
+      "tables": [
+        {
+          "table": "example_table",
+          "tablePattern": "",
+          "actions": [],
+          "blackActs": [],
+          "inBlackList": false,
+          "targetAutoCreate": false,
+          "specifiedPks": [],
+          "columns": [
+            {"column": "id", "targetAutoCreate": false, "inBlackList": false},
+            {"column": "updated_at", "targetAutoCreate": false, "inBlackList": false}
+          ]
+        }
+      ]
+    }
+  ],
+  // mappingDef：与 CloudCanal API 的 mappingDef 结构一致，不提供则默认三段 MIRROR
+  "mapping_def_example": [
+    {"method": "DB_DB", "serializeMapping": {}, "serializeAutoGenRules": {}, "commonGenRule": "MIRROR"},
+    {"method": "TABLE_TABLE", "serializeMapping": {}, "serializeAutoGenRules": {}, "commonGenRule": "MIRROR"},
+    {"method": "COLUMN_COLUMN", "serializeMapping": {}, "serializeAutoGenRules": {}, "commonGenRule": "MIRROR"}
+  ]
+}

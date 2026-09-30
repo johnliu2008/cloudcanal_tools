@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+
+# runtime cache / local data (may contain real hosts/job descriptions)
+datajobs.db
+datajobs.db-journal
+*.db
+*.sqlite3
+
+# local credentials / overrides - never commit real secrets
+.env
+.env.*
+
+# exported job schemas may contain real table structures - review before commit
+exported_*.json
+source_schema.json
+target_schema.json
+mapping_config.json
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
